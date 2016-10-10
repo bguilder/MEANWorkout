@@ -1,0 +1,15 @@
+{
+  "name": "workout",
+  "version": "1.0.0",
+  "description": "workout",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bg",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.3"
+  }
+}
