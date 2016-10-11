@@ -8,6 +8,10 @@ var port = 3000;
 
 mongoose.connect(config.getDbConnectionString());
 apiController(app);
+app.set('view engine', 'ejs');
 
+app.get('/api/workout',function(req,res){
+    res.render('index');
+})
 
 app.listen(port);
