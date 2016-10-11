@@ -9,8 +9,9 @@ var port = 3000;
 mongoose.connect(config.getDbConnectionString());
 apiController(app);
 app.set('view engine', 'ejs');
+app.use('/assets', express.static(__dirname + '/public'));
 
-app.get('/api/workout',function(req,res){
+app.get('/',function(req,res){
     res.render('index');
 })
 
