@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var workoutSchema = new Schema({
     username: String,
-    workout: String,
+    workoutName: String,
     reps: Number,
     weight: Number
 });

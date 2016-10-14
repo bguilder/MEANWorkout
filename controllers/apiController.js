@@ -33,7 +33,7 @@ app.get('/api/setupWorkout', function(req,res){
     var startWorkout = [
         {
             username: 'bguilder',
-            workout: 'Bench',
+            workoutName: 'Bench',
             reps: 5,
             weight: 10
     } 
@@ -48,7 +48,7 @@ app.get('/api/setupWorkout', function(req,res){
 app.post('/api/workout',function(req,res){
     if (req.body.id){
         Workout.findByIdAndUpdate(req.body.id, {
-            workout: req.body.workout,
+            workoutName: req.body.workoutName,
             reps: req.body.reps,
             weight: req.body.weight},
                 function(err,workout){
@@ -60,7 +60,7 @@ app.post('/api/workout',function(req,res){
         else{
             var newWorkout = Workout({
                 username:"test",
-                workout: req.body.workout,
+                workoutName: req.body.workoutName,
                 reps: req.body.reps,
                 weight: req.body.weight
             });

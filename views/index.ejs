@@ -1,20 +1,79 @@
-<html ng-app="TestApp">
+<html lang='en-us' ng-app="TestApp">
 	<head>
 		<title>The MEAN stack</title>
     	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-	</head>
-	<body ng-controller="MainController as vm">
-		
-		<input type="text" ng-model="vm.message" />
-		<br />
-		{{ vm.message }}
-		<br />
-		<ul>
-			<li ng-repeat="person in vm.people">
-				{{ person.name }}
-			</li>
-		</ul>
-		
 		<script src="assets/js/app.js"></script>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+
+        <!-- load bootstrap and fontawesome via CDN -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <style>
+            html, body, input, select, textarea
+            {
+                font-size: 1.05em;
+            }
+        </style>
+
+	</head>
+
+	<body>
+		
+		<header>
+			<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/api/workout/test">AngularJS</a>
+				</div>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+				</ul>
+			</div>
+			</nav>
+		</header>
+
+        <div class="container">
+
+            <div ng-controller="mainController">
+            
+                <h1>Hello world!</h1>
+                
+				<hr/>
+
+				<div class="col-xs-2">
+				Workout: <input class= "form-control" type="text" ng-model="workoutName"/>
+				</div>
+				<div class="col-xs-3">
+				Reps: <input class= "form-control" type="number" ng-model="reps" />
+				</div>
+				<div class="col-xs-4">
+				Weight: <input class= "form-control" type="number" ng-model="weight" />
+				</div>
+				<a href="#" class="btn btn-default" 
+				ng-click="addWorkout()">Add</a>
+
+				<hr/>
+
+				<h3>View from Database</h3>
+				<ul>
+					<li ng-repeat="workout in workouts">
+						Workout Name: {{workout.workoutName}} <br>
+						Reps: {{workout.reps}} <br>
+						Weight: {{workout.weight}}
+					</li>
+				</ul>
+
+
+
+
+				<hr/>
+				Delete Number<input type="number" ng-model="id"/>
+				<a href="#" class="btn btn-default"
+				ng-click="deleteWorkout(id)">Delete</a>
+				
+            </div>       
+		</div>		
 	</body>
 </html>
