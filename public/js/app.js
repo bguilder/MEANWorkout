@@ -8,7 +8,7 @@ function($scope, $http, $location){
 
 		
 		//getting the data
-		$http.get('/api/workout/test')
+		$http.get('/api/workouts/test')
 		
 			.success(function(result){
 
@@ -21,61 +21,46 @@ function($scope, $http, $location){
 				console.log(data);
 			});
 		
-
-
-
     $scope.workoutName = '';
 	$scope.reps = '';
 	$scope.weight = '';
-	$scope.id = '';
-
+	
     $scope.addWorkout = function () {
         //where your sending and what you are sending
         //if you had more you would just use a comma after newRule??
         $http.post('/api/workout', { workoutName: $scope.workoutName, 
 									reps: $scope.reps, 
-									weight: $scope.weight,
-									id: $scope.id})
+									weight: $scope.weight
+									})
 
             .success(function (result) {
-
-                $scope.workoutName = result.workoutName;
-				$scope.reps = result.reps;
-				$scope.weight = result.weight;
-				$scope.id = result.id;
-
-				$scope.reps = '';
-				$scope.weight = '';
-                $scope.workoutName = '';
-				$scope.id = '';
-
+                $scope.msg="yoooo";
             })
             .error(function (data, status) {
-
                 console.log(data);
-
             });
-
     };
 
 
+	$scope.id = '';
 
 	$scope.deleteData = function () {
 
-		var data = {
-			id: $scope.id
-		}
-
+		console.log(JSON.stringify({id: $scope.id}));
+		
 		//Call the service to delete data
-		$http.delete('/api/workout/' , JSON.stringify(data))
-		.success(function (result) {		
+		$http.delete('/api/workout/remove/'+$scope.id)
+		.success(function (result) {					
 		$scope.msg = "Data Deleted Successfully!";
 		})
-
         .error(function (data, status) {
     	     console.log(data);
-      });
-		
+      });		
 	};
 
+	$scope.findData = function(id){
+
+		//JSON.stringify({id: $scope.id});
+		console.log(JSON.stringify({id: $scope.id}));
+	}
 }]);

@@ -7,9 +7,9 @@ module.exports = function(app){
     app.use(bodyParser.urlencoded({extended: true}));
 
     //Username
-    app.get('/api/workout/:username', function(req, res) {
+    app.get('/api/workouts/:uname', function(req, res) {
         
-        Workout.find({ username: req.params.username }, 
+        Workout.find({ username: req.params.uname }, 
         function(err, workout) {
             if (err) throw err;          
             res.send(workout);
@@ -19,11 +19,13 @@ module.exports = function(app){
     //WorkoutID
     app.get('/api/workout/:id', function(req, res) {
        
-       Workout.findById({ _id: req.params.id }, 
-       function(err, workout) {
-           if (err) throw err;         
+       Workout.findById({ _id: req.params.id }, function(err, workout) 
+       {
+           if (err) throw err;
+           
            res.send(workout);
-       });   
+       });
+        
     });
 
     //sets up base data for testing
@@ -70,9 +72,9 @@ module.exports = function(app){
         }
 })
     //deletes a workout
-    app.delete('/api/workout', function(req, res) {
-        
-        Workout.findByIdAndRemove(req.body.id, function(err) {
+    app.delete('/api/workout/remove/:id', function(req, res) {
+        console.log(req.params.id);
+        Workout.findByIdAndRemove(req.params.id, function(err) {
             if (err) throw err;
             res.send('Workout Deleted');
         })
