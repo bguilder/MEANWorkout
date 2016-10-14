@@ -42,37 +42,47 @@
                 
 				<hr/>
 
-				<div class="col-xs-2">
-				Workout: <input class= "form-control" type="text" ng-model="workoutName"/>
-				</div>
-				<div class="col-xs-3">
-				Reps: <input class= "form-control" type="number" ng-model="reps" />
-				</div>
+	<h3>View from Database</h3>
+    <a href="#" class="btn btn-default" ng-click="showme=true">Show</a>
+    <a href="#" class="btn btn-default" ng-click="showme=false">Hide</a>
+		<ul>
+			<li ng-show="showme" ng-repeat = "workout in workouts">
+				Workout Name: {{workout.workoutName}} <br>
+				Reps: {{workout.reps}} <br>
+				Weight: {{workout.weight}} <br>
+				ID: {{workout._id}}
+
+			</li>
+		</ul>
+    </body>
+				<hr/>
+
 				<div class="col-xs-4">
-				Weight: <input class= "form-control" type="number" ng-model="weight" />
+				Workout: <input class= "form-control" type="text" 
+				ng-model="workoutName" placeholder="Enter Workout Name"/>
 				</div>
+				<div class="col-xs-1">
+				Reps: <input class= "form-control" type="number" 
+				ng-model="reps"/>
+				</div>
+				<div class="col-xs-1">
+				Weight: <input class= "form-control" type="number" 
+				ng-model="weight"/>
+				</div> <br>
+
 				<a href="#" class="btn btn-default" 
 				ng-click="addWorkout()">Add</a>
 
 				<hr/>
+				<div class="col-xs-4">
+				Delete Workout: <input class= "form-control" type="text" 
+				ng-model="id" placeholder="Enter Workout ID"/>
+				</div> <br>
 
-				<h3>View from Database</h3>
-				<ul>
-					<li ng-repeat="workout in workouts">
-						Workout Name: {{workout.workoutName}} <br>
-						Reps: {{workout.reps}} <br>
-						Weight: {{workout.weight}}
-					</li>
-				</ul>
-
-
-
+				<a href="#" class="btn btn-default"
+				ng-click="deleteData()">Delete</a>
 
 				<hr/>
-				Delete Number<input type="number" ng-model="id"/>
-				<a href="#" class="btn btn-default"
-				ng-click="deleteWorkout(id)">Delete</a>
-				
             </div>       
 		</div>		
 	</body>

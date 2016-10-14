@@ -6,47 +6,45 @@ module.exports = function(app){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/api/workout/:username', function(req, res) {
+    //Username
+    app.get('/api/workout/:username', function(req, res) {
         
         Workout.find({ username: req.params.username }, 
         function(err, workout) {
-            if (err) throw err;
-            
+            if (err) throw err;          
             res.send(workout);
-        });
-        
+        });      
     });
 
+    //WorkoutID
     app.get('/api/workout/:id', function(req, res) {
        
        Workout.findById({ _id: req.params.id }, 
        function(err, workout) {
-           if (err) throw err;
-           
+           if (err) throw err;         
            res.send(workout);
-       });
-        
+       });   
     });
 
-app.get('/api/setupWorkout', function(req,res){
-
+    //sets up base data for testing
+    app.get('/api/setupWorkout', function(req,res){
     var startWorkout = [
         {
             username: 'bguilder',
             workoutName: 'Bench',
             reps: 5,
             weight: 10
-    } 
-    ];
+    }];
     Workout.create(startWorkout, 
     function(err,results){
         res.send(results);
     });
-
 });
 
-app.post('/api/workout',function(req,res){
-    if (req.body.id){
+    
+    app.post('/api/workout',function(req,res){
+     //posts a workout type if previous workout ID was found
+        if (req.body.id){
         Workout.findByIdAndUpdate(req.body.id, {
             workoutName: req.body.workoutName,
             reps: req.body.reps,
@@ -57,6 +55,7 @@ app.post('/api/workout',function(req,res){
             })
 
         }
+        //posts a workout type if previous workout ID was not found
         else{
             var newWorkout = Workout({
                 username:"test",
@@ -70,8 +69,8 @@ app.post('/api/workout',function(req,res){
             });
         }
 })
-
-app.delete('/api/workout', function(req, res) {
+    //deletes a workout
+    app.delete('/api/workout', function(req, res) {
         
         Workout.findByIdAndRemove(req.body.id, function(err) {
             if (err) throw err;
