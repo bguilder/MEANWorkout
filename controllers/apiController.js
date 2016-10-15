@@ -45,12 +45,12 @@ module.exports = function(app){
 
     
     app.post('/api/workout',function(req,res){
-     //posts a workout type if previous workout ID was found
+     //updates a workout type if previous workout ID was found
         if (req.body.id){
-        Workout.findByIdAndUpdate(req.body.id, {
-            workoutName: req.body.workoutName,
-            reps: req.body.reps,
-            weight: req.body.weight},
+            Workout.findByIdAndUpdate(req.body.id, {
+              workoutName: req.body.workoutName,
+              reps: req.body.reps,
+              weight: req.body.weight},
                 function(err,workout){
                 if (err) throw err;
                 res.send('Workout Updated');

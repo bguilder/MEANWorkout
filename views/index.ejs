@@ -14,6 +14,13 @@
             {
                 font-size: 1.05em;
             }
+			.center-block {
+  				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				color:red;
+			}
+		<
         </style>
 
 	</head>
@@ -24,11 +31,11 @@
 			<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/api/workout/test">AngularJS</a>
+					<a class="navbar-brand" href="/api/workouts/test">Home</a>
 				</div>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+					<li><a href="#"><i class="fa fa-home"></i> bgld3r</a></li>
 				</ul>
 			</div>
 			</nav>
@@ -38,52 +45,97 @@
 
             <div ng-controller="mainController">
             
-                <h1>Hello world!</h1>
-                
-				<hr/>
-
-	<h3>View from Database</h3>
-    <a href="#" class="btn btn-default" ng-click="showme=true">Show</a>
-    <a href="#" class="btn btn-default" ng-click="showme=false">Hide</a>
-		<ul>
-			<li ng-show="showme" ng-repeat = "workout in workouts">
-				Workout Name: {{workout.workoutName}} <br>
-				Reps: {{workout.reps}} <br>
-				Weight: {{workout.weight}} <br>
-				ID: {{workout._id}}
-
-			</li>
-		</ul>
+                <h1>Workout!</h1>
+                <hr/>
+				
     </body>
-				<hr/>
 
-				<div class="col-xs-4">
-				Workout: <input class= "form-control" type="text" 
+	<div>
+		<a href="#" class="btn btn-default" ng-click="toggle(1)">Create Workout</a>
+
+			<div class="createWorkout" ng-show="toggleCreate">
+				<br>
+				<div class="col-md-4" >
+				<input class= "form-control" type="text" 
 				ng-model="workoutName" placeholder="Enter Workout Name"/>
 				</div>
-				<div class="col-xs-1">
-				Reps: <input class= "form-control" type="number" 
-				ng-model="reps"/>
-				</div>
-				<div class="col-xs-1">
-				Weight: <input class= "form-control" type="number" 
-				ng-model="weight"/>
-				</div> <br>
 
-				<a href="#" class="btn btn-default" 
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="reps" placeholder="Reps"/>
+				</div>
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="weight" placeholder="Weight"/>
+				</div>
+
+				<a href="#" class="btn btn-default"
 				ng-click="addWorkout()">Add</a>
 
-				<hr/>
-				<div class="col-xs-4">
-				Delete Workout: <input class= "form-control" type="text" 
-				ng-model="id" placeholder="Enter Workout ID"/>
-				</div> <br>
+			</div>
+	</div>
+	<br>
+		<div>
+		<a href="#" class="btn btn-default" ng-click="toggle(2)">Edit Workout</a>
 
+			<div class="createWorkout" ng-show="toggleEdit">
+				<br>
+				<div class="col-md-4" >
+				<input class= "form-control" type="text" 
+				ng-model="workoutName" placeholder="Enter Workout Name"/>
+				</div>
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="reps" placeholder="Reps"/>
+				</div>
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="weight" placeholder="Weight"/>
+				</div>
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="text" 
+				ng-model="id" placeholder="Enter id"/>
+				</div>
+
+				<a href="#" class="btn btn-default"
+				ng-click="editWorkout()">Edit</a>
+
+			</div>
+	</div>
+			<br>
+    	<a href="#" class="btn btn-default" ng-click="toggle(3)">Delete Workout</a>
+
+		
+			<div class="deleteWorkout" ng-show="toggleDelete">
+				<br>
+				<div class="col-md-4">
+				<input class= "form-control" type="text" 
+				ng-model="id" placeholder="Enter Workout ID"/>
+				</div> 
+	
 				<a href="#" class="btn btn-default"
 				ng-click="deleteData()">Delete</a>
 
+			</div>
+
 				<hr/>
-            </div>       
-		</div>		
+				<h3>View from Database</h3>
+		<table class="table table-striped">
+			<th>Workout</th>
+			<th>Reps</th>
+			<th>Weight</th>
+			<th>ID</th>
+			<tr ng-repeat = "workout in workouts">
+				<td>{{workout.workoutName}}</td>
+				<td>{{workout.reps}} </td>
+				<td>{{workout.weight}} </td>
+				<td>{{workout._id}}</td>
+
+			</tr>
+		</table>	
 	</body>
 </html>
