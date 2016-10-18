@@ -24,14 +24,13 @@
         </style>
 
 	</head>
-
 	<body>
 		
 		<header>
 			<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/api/workouts/test">Home</a>
+					<a class="navbar-brand" href="./home.ejs">Home</a>
 				</div>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -48,7 +47,6 @@
                 <h1>Workout!</h1>
                 <hr/>
 				
-    </body>
 
 	<div>
 		<a href="#" class="btn btn-default" ng-click="toggle(1)">Create Workout</a>
@@ -81,9 +79,14 @@
 
 			<div class="createWorkout" ng-show="toggleEdit">
 				<br>
+				<div class="col-md-3" >
+				<input class= "form-control" type="text" 
+				ng-model="id" placeholder="Enter id"/>
+				</div>
+
 				<div class="col-md-4" >
 				<input class= "form-control" type="text" 
-				ng-model="workoutName" placeholder="Enter Workout Name"/>
+				ng-model="workoutName" placeholder="New Workout Name"/>
 				</div>
 
 				<div class="col-md-2" >
@@ -96,10 +99,6 @@
 				ng-model="weight" placeholder="Weight"/>
 				</div>
 
-				<div class="col-md-2" >
-				<input class= "form-control" type="text" 
-				ng-model="id" placeholder="Enter id"/>
-				</div>
 
 				<a href="#" class="btn btn-default"
 				ng-click="editWorkout()">Edit</a>
@@ -107,20 +106,6 @@
 			</div>
 	</div>
 			<br>
-    	<a href="#" class="btn btn-default" ng-click="toggle(3)">Delete Workout</a>
-
-		
-			<div class="deleteWorkout" ng-show="toggleDelete">
-				<br>
-				<div class="col-md-4">
-				<input class= "form-control" type="text" 
-				ng-model="id" placeholder="Enter Workout ID"/>
-				</div> 
-	
-				<a href="#" class="btn btn-default"
-				ng-click="deleteData()">Delete</a>
-
-			</div>
 
 				<hr/>
 				<h3>View from Database</h3>
@@ -129,12 +114,18 @@
 			<th>Reps</th>
 			<th>Weight</th>
 			<th>ID</th>
-			<tr ng-repeat = "workout in workouts">
+			<th>Edit</html>
+			<th>Delete</th>
+
+			<tr ng-repeat = "workout in workouts ">
 				<td>{{workout.workoutName}}</td>
 				<td>{{workout.reps}} </td>
 				<td>{{workout.weight}} </td>
 				<td>{{workout._id}}</td>
-
+				<td><a href="#" class="btn btn-default"	ng-model="id"
+				ng-click="toggle(2)">Edit</a></td>
+				<td><a href="#" class="btn btn-default"	ng-model="id"
+				ng-click="deleteClick(workout._id)">Delete</a></td>
 			</tr>
 		</table>	
 	</body>

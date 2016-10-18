@@ -1,5 +1,6 @@
 var app = angular.module('TestApp', []);
 
+
 app.controller('mainController',['$scope', '$http', '$location', '$window',
 function($scope, $http, $location, $window){
 
@@ -48,7 +49,7 @@ function($scope, $http, $location, $window){
 
             .success(function (result) {
                 $scope.msg="yoooo";
-		//		$window.location.reload();
+				$window.location.reload();
             })
             .error(function (data, status) {
                 console.log(data);
@@ -57,7 +58,7 @@ function($scope, $http, $location, $window){
 
 	$scope.editWorkout = function() {
 
-		console.log(JSON.stringify({_id: $scope.id}));
+		//console.log(JSON.stringify({_id: $scope.id}));
 
 		$http.post('/api/workout/edit', {workoutName: $scope.workoutName, 
 									reps: $scope.reps, 
@@ -66,33 +67,49 @@ function($scope, $http, $location, $window){
 									})
            .success(function (result) {
                 $scope.msg="updated";
-		//		$window.location.reload();
+				$window.location.reload();
             })
             .error(function (data, status) {
                 console.log(data);
             });
+	};
+
+	$scope.editClick = function(x){
+		console.log(x);
 	}
 
 
 
 	$scope.id = '';
 
-	$scope.deleteData = function () {
+	/*$scope.deleteData = function () {
 
-		console.log(JSON.stringify({_id: $scope.id}));
+		//console.log(JSON.stringify({_id: $scope.id}));
 		
 		//Call the service to delete data
 		$http.delete('/api/workout/remove/'+$scope.id)
 		.success(function (result) {
-	//		$window.location.reload();					
+			$window.location.reload();					
 			$scope.msg = "Data Deleted Successfully!";
 		})
         .error(function (data, status) {
     	     console.log(data);
       });		
 	};
-	$scope.findData = function(id){
+	/*$scope.findData = function(id){
 		//JSON.stringify({id: $scope.id});
-		console.log(JSON.stringify({id: $scope.id}));
-	}
+		console.log(JSON.stringify({id: $scope.id}));		
+	}*/
+	
+
+	$scope.deleteClick = function(x){
+		$http.delete('/api/workout/remove/'+x)
+		.success(function (result) {
+			$window.location.reload();					
+			$scope.msg = "Data Deleted Successfully!";
+		})
+        .error(function (data, status) {
+    	     console.log(data);
+      });		
+	};
 }]);
