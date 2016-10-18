@@ -44,7 +44,7 @@ module.exports = function(app){
 });
 
     
-    app.post('/api/workout',function(req,res){
+    app.post('/api/workout/edit',function(req,res){
      //updates a workout type if previous workout ID was found
         if (req.body.id){
             Workout.findByIdAndUpdate(req.body.id, {
@@ -56,9 +56,12 @@ module.exports = function(app){
                 res.send('Workout Updated');
             })
 
-        }
+        };
+    });
+        app.post('/api/workout/create',function(req,res){
+
         //posts a workout type if previous workout ID was not found
-        else{
+        
             var newWorkout = Workout({
                 username:"test",
                 workoutName: req.body.workoutName,
@@ -69,8 +72,8 @@ module.exports = function(app){
                 if(err)throw err;
                 res.send('New Workout Created');
             });
-        }
-})
+        });
+
     //deletes a workout
     app.delete('/api/workout/remove/:id', function(req, res) {
         console.log(req.params.id);

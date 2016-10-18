@@ -41,7 +41,7 @@ function($scope, $http, $location, $window){
     $scope.addWorkout = function () {
         //where your sending and what you are sending
         //if you had more you would just use a comma after newRule??
-        $http.post('/api/workout', { workoutName: $scope.workoutName, 
+        $http.post('/api/workout/create', { workoutName: $scope.workoutName, 
 									reps: $scope.reps, 
 									weight: $scope.weight
 									})
@@ -59,10 +59,11 @@ function($scope, $http, $location, $window){
 
 		console.log(JSON.stringify({_id: $scope.id}));
 
-		$http.post('/api/workout', {workoutName: $scope.workoutName, 
+		$http.post('/api/workout/edit', {workoutName: $scope.workoutName, 
 									reps: $scope.reps, 
 									weight: $scope.weight,
-									_id: $scope.id})
+									id: $scope.id
+									})
            .success(function (result) {
                 $scope.msg="updated";
 		//		$window.location.reload();
@@ -90,9 +91,7 @@ function($scope, $http, $location, $window){
     	     console.log(data);
       });		
 	};
-
 	$scope.findData = function(id){
-
 		//JSON.stringify({id: $scope.id});
 		console.log(JSON.stringify({id: $scope.id}));
 	}
