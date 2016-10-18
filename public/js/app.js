@@ -5,21 +5,39 @@ app.controller('mainController',['$scope', '$http', '$location', '$window',
 function($scope, $http, $location, $window){
 
 
-		$scope.toggleCreate = false;
-		$scope.toggleDelete = false;
-		$scope.toggleEdit = false;
+		$scope.toggleWorkoutCreate = false;
+		$scope.toggleRunCreate = false;
+		$scope.toggleWorkoutEdit = false;
+		
 		//simple toggle method
 		$scope.toggle = function(x) {
 			if(x===1){
-       			 $scope.toggleCreate = ! $scope.toggleCreate;
+       			 $scope.toggleWorkoutCreate = ! $scope.toggleWorkoutCreate;
 			}
-			else if(x===2){
-				$scope.toggleEdit = ! $scope.toggleEdit;
+			if(x===2){
+				$scope.toggleWorkoutEdit = ! $scope.toggleWorkoutEdit;
 			}
 			else if(x===3){
-				$scope.toggleDelete = ! $scope.toggleDelete;
+				$scope.toggleRunCreate = ! $scope.toggleRunCreate;
 			}
     };
+
+		$scope.editWorkout = function(x){
+			$scope.id = x;
+			$http.post('/api/workout/edit', {workoutName: $scope.workoutName, 
+									reps: $scope.reps, 
+									weight: $scope.weight,
+									id: $scope.id
+									})
+           .success(function (result) {
+                $scope.msg="updated";
+				$window.location.reload();
+            })
+            .error(function (data, status) {
+                console.log(data);
+            });
+
+		}
 		
 		//getting the data
 		$http.get('/api/workouts/test')
@@ -38,27 +56,53 @@ function($scope, $http, $location, $window){
     $scope.workoutName = '';
 	$scope.reps = '';
 	$scope.weight = '';
-	
-    $scope.addWorkout = function () {
+	$scope.sets = '';
+	$scope.distance = '';
+	$scope.time = '';
+	$scope.id = '';
+
+    $scope.addWorkout = function (x) {
         //where your sending and what you are sending
         //if you had more you would just use a comma after newRule??
-        $http.post('/api/workout/create', { workoutName: $scope.workoutName, 
-									reps: $scope.reps, 
-									weight: $scope.weight
+		if(x===1){
+			console.log('inside run');
+			$scope.workoutName = "Run";
+			$http.post('/api/workout/create', { workoutName: $scope.workoutName, 
+											reps: $scope.reps, 
+											weight: $scope.weight,
+											sets: $scope.sets,
+											distance: $scope.distance,
+											time: $scope.time
 									})
-
             .success(function (result) {
-                $scope.msg="yoooo";
+                $scope.msg="Success";
 				$window.location.reload();
             })
             .error(function (data, status) {
                 console.log(data);
             });
+		}
+		else{
+			console.log('inside else');
+			$http.post('/api/workout/create', { workoutName: $scope.workoutName, 
+											reps: $scope.reps, 
+											weight: $scope.weight,
+											sets: $scope.sets,
+											distance: $scope.distance,
+											time: $scope.time
+									})
+            .success(function (result) {
+                $scope.msg="Success";
+				$window.location.reload();
+            })
+            .error(function (data, status) {
+                console.log(data);
+            });
+		}
+			
     };
 
-	$scope.editWorkout = function() {
-
-		//console.log(JSON.stringify({_id: $scope.id}));
+	/*$scope.editWorkout = function() {
 
 		$http.post('/api/workout/edit', {workoutName: $scope.workoutName, 
 									reps: $scope.reps, 
@@ -72,15 +116,7 @@ function($scope, $http, $location, $window){
             .error(function (data, status) {
                 console.log(data);
             });
-	};
-
-	$scope.editClick = function(x){
-		console.log(x);
-	}
-
-
-
-	$scope.id = '';
+	};*/
 
 	/*$scope.deleteData = function () {
 
@@ -101,7 +137,6 @@ function($scope, $http, $location, $window){
 		console.log(JSON.stringify({id: $scope.id}));		
 	}*/
 	
-
 	$scope.deleteClick = function(x){
 		$http.delete('/api/workout/remove/'+x)
 		.success(function (result) {

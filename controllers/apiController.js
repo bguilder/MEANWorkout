@@ -50,7 +50,10 @@ module.exports = function(app){
             Workout.findByIdAndUpdate(req.body.id, {
               workoutName: req.body.workoutName,
               reps: req.body.reps,
-              weight: req.body.weight},
+              weight: req.body.weight,
+              sets: req.body.sets,
+              time: req.body.time,
+              distance: req.body.time},
                 function(err,workout){
                 if (err) throw err;
                 res.send('Workout Updated');
@@ -65,8 +68,11 @@ module.exports = function(app){
             var newWorkout = Workout({
                 username:"test",
                 workoutName: req.body.workoutName,
+                sets: req.body.sets,
                 reps: req.body.reps,
-                weight: req.body.weight
+                weight: req.body.weight,
+                time: req.body.time,
+                distance: req.body.distance
             });
             newWorkout.save(function(err){
                 if(err)throw err;
