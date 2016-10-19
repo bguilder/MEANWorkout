@@ -4,11 +4,12 @@ var Schema = mongoose.Schema;
 
 var workoutSchema = new Schema({
     username: String,
+    date: Date,
     workoutName: String,
     reps: Number,
     weight: Number,
     distance: Number,
-    time: Number
+    time: String
 });
 
 var Workout = mongoose.model('Workout', workoutSchema);

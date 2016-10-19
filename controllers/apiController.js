@@ -16,14 +16,14 @@ module.exports = function(app){
         });      
     });
 
-        app.post('/api/workout/createLifting',function(req,res){ 
-            var newWorkout = Workout({
+    app.post('/api/workout/createLifting',function(req,res){ 
+            var newLifting = Workout({
                 username:"test",
                 workoutName: req.body.workoutName,
                 reps: req.body.reps,
                 weight: req.body.weight,
             });
-            newWorkout.save(function(err){
+            newLifting.save(function(err){
                 if(err)throw err;
                 res.send('New Lifting Workout Created');
             });
@@ -42,20 +42,20 @@ module.exports = function(app){
         };
     });
 
-        app.post('/api/workout/createRunning',function(req,res){
-            var newWorkout = Workout({
+    app.post('/api/workout/createRunning',function(req,res){
+            var newRunning = Workout({
                 username:"test",
                 workoutName: "Run",
                 distance: req.body.distance,
                 time: req.body.time
             });
-            newWorkout.save(function(err){
+            newRunning.save(function(err){
                 if(err)throw err;
                 res.send('New Running Workout Created');
             });
         });
 
-        app.post('/api/workout/editRunning',function(req,res){
+    app.post('/api/workout/editRunning',function(req,res){
         if (req.body.id){
             Workout.findByIdAndUpdate(req.body.id, {
               distance: req.body.distance,
@@ -67,6 +67,19 @@ module.exports = function(app){
         };
     });
 
+    app.post('/api/workout/createTimes',function(req,res){
+        var newTimes = Workout({
+                username:"test",
+                running: req.body.running,
+                lifting: req.body.lifting,
+                strech: req.body.stretch,
+                core: req.body.core
+            });
+            newTimes.save(function(err){
+                if(err)throw err;
+                res.send('New Time Tracker Created');
+            });
+    });
     
     //deletes a workout
     app.delete('/api/workout/remove/:id', function(req, res) {
@@ -74,7 +87,8 @@ module.exports = function(app){
         Workout.findByIdAndRemove(req.params.id, function(err) {
             if (err) throw err;
             res.send('Workout Deleted');
-        })
-        
+        })      
     });
+
+
 }

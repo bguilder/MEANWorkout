@@ -11,6 +11,7 @@ function($scope, $http, $location, $window){
 		$scope.distance = '';
 		$scope.time = '';
 		$scope.id = '';
+		$scope.validTime = '';
 
 		$scope.liftingCreateForm = false;
 		$scope.liftingEditForm = false;
@@ -75,6 +76,7 @@ function($scope, $http, $location, $window){
 
 		$scope.createRunningWorkout = function(){
 
+			if($scope.validTime === "valid"){
 			$scope.workoutName = "Run";
 			$http.post('/api/workout/createRunning', { workoutName: $scope.workoutName, 
 											distance: $scope.distance,
@@ -87,7 +89,11 @@ function($scope, $http, $location, $window){
             .error(function (data, status) {
                 console.log(data);
             });
-		};
+		}
+			else{
+				window.alert("Enter(hh:mm:ss)")
+			}
+		}
 
 		$scope.editRunningWorkout = function(){
 			$http.post('/api/workout/editRunning', {workoutName: $scope.workoutName, 
@@ -116,6 +122,18 @@ function($scope, $http, $location, $window){
       });		
 	};	
     
+	$scope.validateTime = function(x){
+
+		var regex = /^([0-9]:)?[0-5]?[0-9]:[0-5][0-9]$/;
+		if(x.match(regex)){
+			$scope.validTime = "valid";
+		}
+		else{
+			$scope.validTime = "invalid";
+		}
+	}
+
+
 
 	/*$scope.editWorkout = function() {
 
