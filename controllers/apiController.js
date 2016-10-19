@@ -6,7 +6,7 @@ module.exports = function(app){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
 
-    //Username
+    //Username get all workouts
     app.get('/api/workouts/:uname', function(req, res) {
         
         Workout.find({ username: req.params.uname }, 
@@ -16,70 +16,58 @@ module.exports = function(app){
         });      
     });
 
-    //WorkoutID
-    app.get('/api/workout/:id', function(req, res) {
-       
-       Workout.findById({ _id: req.params.id }, function(err, workout) 
-       {
-           if (err) throw err;
-           
-           res.send(workout);
-       });
-        
-    });
-
-    //sets up base data for testing
-    app.get('/api/setupWorkout', function(req,res){
-    var startWorkout = [
-        {
-            username: 'bguilder',
-            workoutName: 'Bench',
-            reps: 5,
-            weight: 10
-    }];
-    Workout.create(startWorkout, 
-    function(err,results){
-        res.send(results);
-    });
-});
-
+        app.post('/api/workout/createLifting',function(req,res){ 
+            var newWorkout = Workout({
+                username:"test",
+                workoutName: req.body.workoutName,
+                reps: req.body.reps,
+                weight: req.body.weight,
+            });
+            newWorkout.save(function(err){
+                if(err)throw err;
+                res.send('New Lifting Workout Created');
+            });
+        });
     
-    app.post('/api/workout/edit',function(req,res){
-     //updates a workout type if previous workout ID was found
+    app.post('/api/workout/editLifting',function(req,res){
         if (req.body.id){
             Workout.findByIdAndUpdate(req.body.id, {
               workoutName: req.body.workoutName,
               reps: req.body.reps,
-              weight: req.body.weight,
-              sets: req.body.sets,
-              time: req.body.time,
-              distance: req.body.time},
+              weight: req.body.weight},
                 function(err,workout){
                 if (err) throw err;
-                res.send('Workout Updated');
+                res.send('Lifting Workout Updated');
             })
-
         };
     });
-        app.post('/api/workout/create',function(req,res){
 
-        //posts a workout type if previous workout ID was not found
-        
+        app.post('/api/workout/createRunning',function(req,res){
             var newWorkout = Workout({
                 username:"test",
-                workoutName: req.body.workoutName,
-                sets: req.body.sets,
-                reps: req.body.reps,
-                weight: req.body.weight,
-                time: req.body.time,
-                distance: req.body.distance
+                workoutName: "Run",
+                distance: req.body.distance,
+                time: req.body.time
             });
             newWorkout.save(function(err){
                 if(err)throw err;
-                res.send('New Workout Created');
+                res.send('New Running Workout Created');
             });
         });
 
+        app.post('/api/workout/editRunning',function(req,res){
+        if (req.body.id){
+            Workout.findByIdAndUpdate(req.body.id, {
+              distance: req.body.distance,
+              time: req.body.time},
+                function(err,workout){
+                if (err) throw err;
+                res.send('Running Workout Updated');
+            })
+        };
+    });
+
+    
     //deletes a workout
     app.delete('/api/workout/remove/:id', function(req, res) {
         console.log(req.params.id);

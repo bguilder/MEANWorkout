@@ -52,16 +52,14 @@
 			<th>Workout</th>
 			<th>Reps</th>
 			<th>Weight</th>
-			<th>ID</th>
 			<th>Edit</html>
 			<th>Delete</th>
 			<tr ng-repeat = "workout in workouts " ng-if="workout.workoutName!='Run'">
 				<td>{{workout.workoutName}}</td>
 				<td>{{workout.reps}} </td>
 				<td>{{workout.weight}} </td>
-				<td>{{workout._id}}</td>
 				<td><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="toggle(2)">Edit</a></td>
+				ng-click="toggleLiftingEdit(workout._id)">Edit</a></td>
 				<td><a href="#" class="btn btn-default"	ng-model="id"
 				ng-click="deleteClick(workout._id)">Delete</a></td>
 			</tr>
@@ -69,9 +67,9 @@
 	</div>
 
 <div>
-		<a href="#" class="btn btn-default" ng-click="toggle(1)">New Workout</a>
+		<a href="#" class="btn btn-default" ng-click="toggleLiftingCreate()">New Workout</a>
 
-			<div class="createWorkout" ng-show="toggleWorkoutCreate">
+			<div ng-show="liftingCreateForm">
 				<br>
 				<div class="col-md-4" >
 				<input class= "form-control" type="text" 
@@ -89,19 +87,14 @@
 				</div>
 
 				<a href="#" class="btn btn-default"
-				ng-click="addWorkout()">Add</a>	
+				ng-click="createLiftingWorkout()">Add</a>	
 			</div>
 	</div>
 
 	<br>
 
 	<div>
-			<div class="createWorkout" ng-show="toggleWorkoutEdit">
-				<br>
-				<div class="col-md-3" >
-				<input class= "form-control" type="text" 
-				ng-model="id" placeholder="Enter id"/>
-				</div>
+			<div ng-show="liftingEditForm">
 
 				<div class="col-md-4" >
 				<input class= "form-control" type="text" 
@@ -118,7 +111,7 @@
 				ng-model="weight" placeholder="Weight"/>
 				</div>
 					<a href="#" class="btn btn-default"
-				ng-click="editWorkout()">Edit</a>	
+				ng-click="editLiftingWorkout()">Edit</a>	
 			</div>
 			
 	</div>
@@ -129,19 +122,16 @@
 	<div>
 		<h3>Running</h3>
 		<table class="table table-striped">
-			<th>Workout</th>
 			<th>Distance</th>
 			<th>Time</th>
-			<th>ID</th>
-			<th>Delete</th>
 			<th>Edit</th>
+			<th>Delete</th>
 
 			<tr ng-repeat = "workout in workouts " ng-if="workout.workoutName=='Run'">
-				<td>{{workout.workoutName}}</td>
 				<td>{{workout.distance}} miles</td>
 				<td>{{workout.time}} </td>
 				<td><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="editWorkout(workout._id)">Edit</a></td>
+				ng-click="toggleRunningEdit(workout._id)">Edit</a></td>
 				<td><a href="#" class="btn btn-default"	ng-model="id"
 				ng-click="deleteClick(workout._id)">Delete</a></td>
 			</tr>
@@ -149,9 +139,9 @@
 	</div>
 
 	<div>
-		<a href="#" class="btn btn-default" ng-click="toggle(3)">New Run</a>
+		<a href="#" class="btn btn-default" ng-click="toggleRunningCreate()">New Run</a>
 
-			<div class="createWorkout" ng-show="toggleRunCreate">
+			<div ng-show="runningCreateForm">
 				<br>		
 
 				<div class="col-md-2" >
@@ -165,13 +155,32 @@
 				</div>
 
 				<a href="#" class="btn btn-default"
-				ng-click="addWorkout(1)">Add</a>
+				ng-click="createRunningWorkout()">Add</a>
 	</div>
+
+	<div><br>
+			<div ng-show="runningEditForm">
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="distance" placeholder="Edit Distance Ran"/>
+				</div>
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="time" placeholder="Edit Time"/>
+				</div>
+					<a href="#" class="btn btn-default"
+				ng-click="editRunningWorkout()">Edit</a>	
+			</div>
+			
+	</div>
+
 
 	</body>
 	<footer>
 		<hr>
-		<h3>Footer</h3>
+		<h3>github.com/bguilder</h3>
 		<hr>
 	</footer>
 </html>
