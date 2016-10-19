@@ -12,9 +12,19 @@ module.exports = function(app){
         Workout.find({ username: req.params.uname }, 
         function(err, workout) {
             if (err) throw err;          
-            res.send(workout);
-        });      
+            res.send(workout);   
     });
+    });
+
+    app.get('/api/timeTracker/:uname', function(req,res){
+        TimeTracker.find({username: req.params.uname },
+        function(err, timeTracker){
+            if (err) throw err;
+            res.send(timeTracker);
+        });
+    });
+  
+
 
     app.post('/api/workout/createLifting',function(req,res){ 
             var newLifting = Workout({
@@ -69,11 +79,11 @@ module.exports = function(app){
 
     app.post('/api/workout/createTimes',function(req,res){
         var newTimes = Workout({
-                username:"test",
-                running: req.body.running,
-                lifting: req.body.lifting,
-                strech: req.body.stretch,
-                core: req.body.core
+                username: "test",
+                runningTime: req.body.runningTime,
+                liftingTime: req.body.liftingTime,
+                stretchTime: req.body.stretchTime,
+                coreTime: req.body.coreTime
             });
             newTimes.save(function(err){
                 if(err)throw err;
@@ -81,6 +91,20 @@ module.exports = function(app){
             });
     });
     
+    app.post('/api/workout/editTimes', function(req,res){
+        if (req.body.id){
+            Workout.findByIdAndUpdate(req.body.id, {
+              runningTime: req.body.runningTime,
+              liftingTime: req.body.liftingTime,
+              stretchTime: req.body.stretchTime,
+              coreTime: req.body.coreTime},
+                function(err,workout){
+                if (err) throw err;
+                res.send('Running Workout Updated');
+            })
+        };
+    })
+
     //deletes a workout
     app.delete('/api/workout/remove/:id', function(req, res) {
         console.log(req.params.id);
@@ -89,6 +113,8 @@ module.exports = function(app){
             res.send('Workout Deleted');
         })      
     });
+
+    
 
 
 }
