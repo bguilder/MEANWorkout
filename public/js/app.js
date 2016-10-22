@@ -4,7 +4,7 @@ var app = angular.module('TestApp', []);
 app.controller('mainController',['$scope', '$http', '$location', '$window',
 function($scope, $http, $location, $window){
 
-
+		$scope.searchWorkouts = '';
    		$scope.workoutName = '';
 		$scope.reps = '';
 		$scope.weight = '';
@@ -15,12 +15,29 @@ function($scope, $http, $location, $window){
 
 		$scope.liftingCreateForm = false;
 		$scope.liftingEditForm = false;
-		$scope.runningEditForm = false;
 		$scope.runningCreateForm = false;
+		$scope.runningEditForm = false;	
+		$scope.workoutSortTable = false;
+		$scope.runningTable = false;
+		$scope.workoutButtons = false;
+		$scope.newLiftingForm = false;
 
 		//simple toggle method
-		$scope.toggleLiftingCreate = function() {
+		$scope.toggleLiftingCreate = function(x) {
+			if(x == 1){
+				$scope.workoutName = "Bench";
+			}
+			else if(x == 2){
+				$scope.workoutName = "Squat";
+			}
+			else if(x == 3){
+				$scope.workoutName = "Curls";
+			}	
        			 $scope.liftingCreateForm = ! $scope.liftingCreateForm;
+		}
+
+		$scope.toggleLiftingButtons = function(){
+			$scope.workoutButtons = ! $scope.workoutButtons;
 		}
 		$scope.toggleLiftingEdit = function(x){
 				$scope.id = x;
@@ -33,6 +50,15 @@ function($scope, $http, $location, $window){
 			$scope.id = x;
 				$scope.runningEditForm = ! $scope.runningEditForm;
 		}
+		$scope.toggleWorkoutSort = function(){
+			$scope.workoutSortTable = ! $scope.workoutSortTable;
+		}
+		$scope.toggleRunningTable = function(){
+			$scope.runningTable = ! $scope.toggleRunningTable;
+		}
+		$scope.toggleLiftingCreateNew() = function(){
+			$scope.newLiftingForm = $scope.newLiftingForm;
+		}
 	
 		$http.get('/api/workouts/test')
 			.success(function(result){
@@ -44,6 +70,7 @@ function($scope, $http, $location, $window){
 			});
 
     $scope.createLiftingWorkout = function () {
+
 		$http.post('/api/workout/createLifting', { workoutName: $scope.workoutName, 
 											reps: $scope.reps, 
 											weight: $scope.weight,
@@ -56,7 +83,20 @@ function($scope, $http, $location, $window){
                 console.log(data);
             });
 		};
-
+	
+		$scope.createLiftingWorkout = function () {
+			$http.post('/api/workout/createLifting', { workoutName: $scope.workoutName, 
+										reps: $scope.reps, 
+										weight: $scope.weight,
+								})
+		.success(function (result) {
+			$scope.msg="Success";
+			$window.location.reload();
+		})
+		.error(function (data, status) {
+			console.log(data);
+		});
+	};
 
 		$scope.editLiftingWorkout = function(){
 			$http.post('/api/workout/editLifting', {workoutName: $scope.workoutName, 
@@ -109,6 +149,43 @@ function($scope, $http, $location, $window){
                 console.log(data);
             });
 		}
+
+		$scope.createTime = function(){
+
+			if($scope.validTime === "valid"){
+			
+			$http.post('/api/workout/createRunning', { workoutName: $scope.workoutName, 
+											distance: $scope.distance,
+											time: $scope.time
+									})
+            .success(function (result) {
+                $scope.msg="Success";
+				$window.location.reload();
+            })
+            .error(function (data, status) {
+                console.log(data);
+            });
+		}
+			else{
+				window.alert("Enter(hh:mm:ss)")
+			}
+		}
+
+		$scope.editTime = function(){
+			$http.post('/api/workout/editRunning', {workoutName: $scope.workoutName, 
+									distance: $scope.distance, 
+									time: $scope.time,
+									id: $scope.id
+									})
+           .success(function (result) {
+                $scope.msg="updated";
+				$window.location.reload();
+            })
+            .error(function (data, status) {
+                console.log(data);
+            });
+		}
+
 		
 	//Deletes Workout
 	$scope.deleteClick = function(x){
