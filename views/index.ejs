@@ -59,7 +59,7 @@
 			<th>Weight</th>
 			<th>Edit</html>
 			<th>Delete</th>
-			<tr ng-repeat = "workout in workouts | filter:searchWorkouts" >
+			<tr ng-repeat = "workout in workouts | filter:searchWorkouts | orderBy:'-'" >
 				<td>{{workout.workoutName}}</td>
 				<td>{{workout.reps}} </td>
 				<td>{{workout.weight}} </td>
@@ -70,7 +70,25 @@
 			</tr>
 		</table>
 
-	<hr>
+			<div ng-show="liftingEditForm">
+
+				<div class="col-md-4" >
+				<input class= "form-control" type="text" 
+				ng-model="workoutName" placeholder="New Workout Name"/>
+				</div>
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="reps" placeholder="Reps"/>
+				</div>
+
+				<div class="col-md-2" >
+				<input class= "form-control" type="number" 
+				ng-model="weight" placeholder="Weight"/>
+				</div>
+					<a href="#" class="btn btn-default"
+				ng-click="editLiftingWorkout()">Edit</a>	
+			</div>
 
 	<a href="#" class="btn btn-default"
 		ng-click="toggleLiftingButtons()">Add Workout</a>
@@ -88,7 +106,7 @@
 		ng-click="toggleLiftingCreate(3)">Curls</a>
 
 		<a href="#" class="btn btn-default"
-		ng-click="toggleLiftingCreateNew()">Other</a>
+		ng-click="toggleNewLift()">Other</a>
 	</div>
 
 
@@ -109,10 +127,10 @@
 				ng-click="createLiftingWorkout()">Add</a>	
 		</div>
 
-		<div ng-show="newLiftingForm">	
-			<div>
+		
+			<div ng-show="newLiftingForm">
 				<br>
-				<div class="workouts" ng-model="workoutName"
+				<div class="col-md-4" ng-model="workoutName">
 				<input class="form-control" type="text"
 				ng-model="workoutName" placeholder="Enter Workout Name"/>
 				</div>
@@ -130,31 +148,11 @@
 				<a href="#" class="btn btn-default"
 				ng-click="createLiftingWorkout()">Add</a>	
 		</div>
-	<br>
 
-	<div>
-			<div ng-show="liftingEditForm">
 
-				<div class="col-md-4" >
-				<input class= "form-control" type="text" 
-				ng-model="workoutName" placeholder="New Workout Name"/>
-				</div>
-
-				<div class="col-md-2" >
-				<input class= "form-control" type="number" 
-				ng-model="reps" placeholder="Reps"/>
-				</div>
-
-				<div class="col-md-2" >
-				<input class= "form-control" type="number" 
-				ng-model="weight" placeholder="Weight"/>
-				</div>
-					<a href="#" class="btn btn-default"
-				ng-click="editLiftingWorkout()">Edit</a>	
-			</div>
-	</div>
 
 	<hr>
+
 	<div>
 		<h3>Running</h3>
 		<table class="table table-striped">
@@ -176,6 +174,10 @@
 
 
 	
+		<a href="#" class="btn btn-default" ng-click="toggleRunningCreate()">New Run</a>
+				<br>
+			<div ng-show="runningCreateForm">
+				<br>		
 
 				<div class="col-md-2" >
 				<input class= "form-control" type="number" 
@@ -189,25 +191,24 @@
 
 				<a href="#" class="btn btn-default"
 				ng-click="validateTime(time); createRunningWorkout()">Add</a>
-
+			</div>
 <br>
-			<div ng-show="runningEditForm">
 
+			<div ng-show="runningEditForm">
 				<div class="col-md-2" >
 				<input class= "form-control" type="number" 
 				ng-model="distance" placeholder="Edit Distance Ran"/>
 				</div>
-
 				<div class="col-md-2" >
 				<input class= "form-control" type="string" 
-				ng-model="time" placeholder="Edit Time"/>
+				ng-model="time" placeholder="hh:mm:ss"/>
 				</div>
 					<a href="#" class="btn btn-default"
-				ng-click="editRunningWorkout()">Edit</a>	
+				ng-click="validateTime(time); editRunningWorkout()">Edit</a>	
 			</div>	
-
-	</div>
 	</body>
+
+
 	<footer>
 		<hr>
 		<h3>github.com/bguilder</h3>
