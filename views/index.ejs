@@ -40,6 +40,9 @@
 			.workoutButtons{
 				padding-left: 1em;
 			}
+			.runButtons{
+				padding-left: 3em;
+			}
 
 
 		
@@ -125,17 +128,18 @@
 	<br>
 
 	
-	<div>
 		<h2 class="run">Run Tracker</h2>
 		<hr>
 
+		<div class="runButtons">
 		
-
 		<a href="#" class="btn btn-default"
 				ng-click="toggleRunningTable()">Show</a>
+		
 		<a href="#" class="btn btn-default" 
 				ng-click="toggleRunningCreate()">New Run</a>
-
+	
+		</div>
 			<div ng-show="runningCreateForm">
 				<br>
 				<div class="col-md-2" >
@@ -170,7 +174,6 @@
 				ng-click="deleteClick(workout._id)">Delete</a></td>
 			</tr>
 		</table>
-	</div>		
 
 			<div ng-show="runningEditForm">
 				<div class="col-md-2" >
