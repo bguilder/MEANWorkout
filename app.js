@@ -4,7 +4,7 @@ var config = require('./config');
 var apiController = require('./controllers/apiController')
 var app = express();
 
-var port = 3000;
+app.set('port', (process.env.PORT || 3000));
 
 mongoose.connect(config.getDbConnectionString());
 apiController(app);
@@ -15,4 +15,6 @@ app.get('/',function(req,res){
     res.render('index');
 })
 
-app.listen(port);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
