@@ -19,22 +19,29 @@
 			}
 			footer{
 				text-align:center;
-				color:862633;
 			}
 			.title{
 				background-color:862633;
 				color:EED484;
+				font-size: 2.0em;
 				text-align:center;
+
 			}
 			.run{
 				background-color:862633;
 				color:EED484;
+				font-size: 2.0em;
 				text-align:center;
 			}
 			.intro{
 				padding: 1.3em;
 				background-color:EED484;
 			}
+			.workoutButtons{
+				padding-left: 1em;
+			}
+
+
 		
         </style>
 
@@ -59,18 +66,22 @@
                 <h2 class="title">Exercise Tracker</h2>
 				<hr>
 
+		<div class="runningMain">
+
 		<a href="#" class="btn btn-default"
 				ng-click="toggleWorkoutSort()">Show</a>
 
 		<a href="#" class="btn btn-default"
 				ng-click="toggleLiftingButtons()">Add Workout</a>
-				<div class="col-md-4" >
 
+				<div class="col-md-5" >
 				<input class= "form-control" type="text" 
 				ng-model="searchWorkouts" placeholder="Sort by Name"/>
 				</div>
+         </div>
 
-	<div ng-show="workoutButtons">
+	<div class="workoutButtons" ng-show="workoutButtons">
+		<br>
 		<a href="#" class="btn btn-default"
 		ng-click="toggleLiftingCreate(1)">Bench</a>
 
@@ -101,19 +112,15 @@
 				ng-click="createLiftingWorkout()">Add</a>	
 		</div>
 
-
-
-
-
-
-
 		<table class="table table-striped" ng-show="workoutSortTable">
+			<th>Date</th>
 			<th>Workout</th>
 			<th>Reps</th>
 			<th>Weight</th>
 			<th>Edit</html>
 			<th>Delete</th>
 			<tr ng-repeat = "workout in workouts | filter:searchWorkouts | orderBy:'-'" ng-if="workout.workoutName!='Run'" >
+				<td class="col-md-3">{{workout.date}}</td>
 				<td>{{workout.workoutName}}</td>
 				<td>{{workout.reps}} </td>
 				<td>{{workout.weight}} </td>
@@ -148,32 +155,23 @@
 
 	<hr>
 	<br>
-	<div>
-		<h2 class="run">Run Tracker</h2>
-		<table class="table table-striped">
-			<th>Distance</th>
-			<th>Time</th>
-			<th>Edit</th>
-			<th>Delete</th>
-
-			<tr ng-repeat = "workout in workouts " ng-if="workout.workoutName=='Run'">
-				<td class="col-md-1">{{workout.distance}} miles</td>
-				<td class="col-md-1">{{workout.time}} </td>
-				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="toggleRunningEdit(workout._id)">Edit</a></td>
-				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="deleteClick(workout._id)">Delete</a></td>
-			</tr>
-		</table>
-	</div>
-
 
 	
-		<a href="#" class="btn btn-default" ng-click="toggleRunningCreate()">New Run</a>
-				<br>
-			<div ng-show="runningCreateForm">
-				<br>		
+	<div>
+		<h2 class="run">Run Tracker</h2>
+		<hr>
 
+		
+		<div class="col-md-4" >
+		<input class= "form-control" type="text" 
+		ng-model="searchRunning" placeholder="Sort by Name"/>
+		</div>
+		<a href="#" class="btn btn-default"
+				ng-click="toggleRunningTable()">Show</a>
+		<a href="#" class="btn btn-default" ng-click="toggleRunningCreate()">New Run</a>
+
+			<div ng-show="runningCreateForm">
+				<br>
 				<div class="col-md-2" >
 				<input class= "form-control" type="number" 
 				ng-model="distance" placeholder="Distance Ran"/>
@@ -187,7 +185,24 @@
 				<a href="#" class="btn btn-default"
 				ng-click="validateTime(time); createRunningWorkout()">Add</a>
 			</div>
-<br>
+
+
+		<table class="table table-striped" ng-show="runningTable">
+			<th>Distance</th>
+			<th>Time</th>
+			<th>Edit</th>
+			<th>Delete</th>
+
+			<tr ng-repeat = "workout in workouts | filter:searchRunning | orderBy:'-'" ng-if="workout.workoutName=='Run'">
+				<td class="col-md-1">{{workout.distance}} miles</td>
+				<td class="col-md-1">{{workout.time}} </td>
+				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
+				ng-click="toggleRunningEdit(workout._id)">Edit</a></td>
+				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
+				ng-click="deleteClick(workout._id)">Delete</a></td>
+			</tr>
+		</table>
+	</div>		
 
 			<div ng-show="runningEditForm">
 				<div class="col-md-2" >

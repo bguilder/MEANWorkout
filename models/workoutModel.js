@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
+var myDate = new Date();
 
 var workoutSchema = new Schema({
     username: String,
+    date: { type: Date, default: Date.now },
     workoutName: String,
     reps: Number,
     weight: Number,

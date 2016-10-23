@@ -30,6 +30,7 @@ module.exports = function(app){
             var newLifting = Workout({
                 username:"test",
                 workoutName: req.body.workoutName,
+                date:req.body.date,
                 reps: req.body.reps,
                 weight: req.body.weight,
             });

@@ -21,6 +21,7 @@ function($scope, $http, $location, $window){
 		$scope.runningTable = false;
 		$scope.workoutButtons = false;
 		$scope.newLiftingForm = false;
+		$scope.runningTable = false;
 
 		//simple toggle method
 		$scope.toggleLiftingCreate = function(x) {
@@ -61,6 +62,9 @@ function($scope, $http, $location, $window){
 		}
 		$scope.toggleNewLift = function(){
 			$scope.newLiftingForm = ! $scope.newLiftingForm;
+		}
+		$scope.toggleRunningTable = function(){
+			$scope.runningTable = ! $scope.runningTable;
 		}
 	
 		$http.get('/api/workouts/test')
