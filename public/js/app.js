@@ -39,9 +39,12 @@ function($scope, $http, $location, $window){
 		$scope.toggleLiftingButtons = function(){
 			$scope.workoutButtons = ! $scope.workoutButtons;
 		}
-		$scope.toggleLiftingEdit = function(workoutID){
+		$scope.toggleLiftingEdit = function(workoutID, workoutName,workoutReps, workoutWeight){
 				$scope.id = workoutID;
-			$scope.liftingEditForm = ! $scope.liftingEditForm;
+				$scope.workoutName = prompt("Enter Workout Name",workoutName);
+				$scope.reps = prompt("Enter Reps",workoutReps);
+				$scope.weight = prompt("Enter Weight",workoutWeight);
+				$scope.editLiftingWorkout();
 		}
 		$scope.toggleRunningCreate = function(){
 				$scope.runningCreateForm = ! $scope.runningCreateForm;
