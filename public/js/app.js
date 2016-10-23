@@ -19,27 +19,11 @@ function($scope, $http, $location, $window){
 		$scope.runningEditForm = false;	
 		$scope.workoutSortTable = false;
 		$scope.runningTable = false;
-		$scope.workoutButtons = false;
 		$scope.newLiftingForm = false;
 		$scope.runningTable = false;
 
-		//simple toggle method
-		$scope.toggleLiftingCreate = function(x) {
-			if(x == 1){
-				$scope.workoutName = "Bench";
-			}
-			else if(x == 2){
-				$scope.workoutName = "Squat";
-			}
-			else if(x == 3){
-				$scope.workoutName = "Curls";
-			}	
-       			 $scope.liftingCreateForm = ! $scope.liftingCreateForm;
-		}
+		//simple toggle methods
 
-		$scope.toggleLiftingButtons = function(){
-			$scope.workoutButtons = ! $scope.workoutButtons;
-		}
 		$scope.toggleLiftingEdit = function(workoutID, workoutName,workoutReps, workoutWeight){
 				$scope.id = workoutID;
 				$scope.workoutName = prompt("Enter Workout Name",workoutName);
@@ -173,6 +157,11 @@ function($scope, $http, $location, $window){
 			console.log("invalid");
 			$scope.validTime = "invalid";
 		}
+	}
+
+	$scope.formatDate = function(x){
+		var date = x;
+		console.log(date);
 	}
 
 }]);

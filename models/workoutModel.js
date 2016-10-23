@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
-var myDate = new Date();
 
 var workoutSchema = new Schema({
     username: String,

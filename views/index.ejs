@@ -57,7 +57,6 @@
 				<h1 class="hello">Hello World!</h1>
 				<p1>This is my first website. It is a workout tracking application that I designed and developed from scratch
 					with help from two courses on Udemy.com: Learn and Understand Node.js, Learn and Understand AngularJS.
-					I used Postman to help build my API and Visual Studio as my IDE.
 					All of the source code is on my github account.	Any questions
 					feel free to contact me at bguilder@gmail.com</p1><br><br>
 					<p2>Thank you for checking out my application!</p2><br><br>
@@ -72,66 +71,15 @@
 				ng-click="toggleWorkoutSort()">Show</a>
 
 		<a href="#" class="btn btn-default"
-				ng-click="toggleLiftingButtons()">Add Workout</a>
+				ng-click="toggleNewLift()">Add Workout</a>
 
 				<div class="col-md-5" >
 				<input class= "form-control" type="text" 
 				ng-model="searchWorkouts" placeholder="Sort by Name"/>
 				</div>
          </div>
-
-	<div class="workoutButtons" ng-show="workoutButtons">
-		<br>
-		<a href="#" class="btn btn-default"
-		ng-click="toggleLiftingCreate(1)">Bench</a>
-
-		<a href="#" class="btn btn-default"
-		ng-click="toggleLiftingCreate(2)">Squat</a>
-
-		<a href="#" class="btn btn-default"
-		ng-click="toggleLiftingCreate(3)">Curls</a>
-
-		<a href="#" class="btn btn-default"
-		ng-click="toggleNewLift()">Other</a>
-	</div>
-
-		<div ng-show="liftingCreateForm">	
-				<div ng-model="workoutName"></div>
-			
-				<div class="col-md-2" >
-				<input class= "form-control" type="number" 
-				ng-model="reps" placeholder="Reps"/>
-				</div>
-
-				<div class="col-md-2" >
-				<input class= "form-control" type="number" 
-				ng-model="weight" placeholder="Weight"/>
-				</div>
-
-				<a href="#" class="btn btn-default"
-				ng-click="createLiftingWorkout()">Add</a>	
-		</div>
-
-		<table class="table table-striped" ng-show="workoutSortTable">
-			<th>Date</th>
-			<th>Workout</th>
-			<th>Reps</th>
-			<th>Weight</th>
-			<th>Edit</html>
-			<th>Delete</th>
-			<tr ng-repeat = "workout in workouts | filter:searchWorkouts | orderBy:'-'" ng-if="workout.workoutName!='Run'" >
-				<td class="col-md-3">{{workout.date}}</td>
-				<td>{{workout.workoutName}}</td>
-				<td>{{workout.reps}} </td>
-				<td>{{workout.weight}} </td>
-				<td><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="toggleLiftingEdit(workout._id, workout.workoutName, workout.reps, workout.weight)">Edit</a></td>
-				<td><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="deleteClick(workout._id)">Delete</a></td>
-			</tr>
-		</table>
-
-			<div ng-show="newLiftingForm">
+		<div ng-show="newLiftingForm">
+			<br>
 				<div class="col-md-4" ng-model="workoutName">
 				<input class="form-control" type="text"
 				ng-model="workoutName" placeholder="Enter Workout Name"/>
@@ -152,6 +100,26 @@
 		</div>
 
 
+		<table class="table table-striped" ng-show="workoutSortTable">
+			<th>Date</th>
+			<th>Workout</th>
+			<th>Reps</th>
+			<th>Weight</th>
+			<th>Edit</html>
+			<th>Delete</th>
+			<tr ng-repeat = "workout in workouts | filter:searchWorkouts | orderBy:'-'" ng-if="workout.workoutName!='Run'" >
+				<td class="col-md-2">{{workout.date| date:'MM/dd/yyyy @ h:mma'}}</td>
+				<td>{{workout.workoutName}}</td>
+				<td>{{workout.reps}} </td>
+				<td>{{workout.weight}} </td>
+				<td><a href="#" class="btn btn-default"	ng-model="id"
+				ng-click="toggleLiftingEdit(workout._id, workout.workoutName, workout.reps, workout.weight)">Edit</a></td>
+				<td><a href="#" class="btn btn-default"	ng-model="id"
+				ng-click="deleteClick(workout._id)">Delete</a></td>
+			</tr>
+		</table>
+
+
 
 	<hr>
 	<br>
@@ -162,13 +130,11 @@
 		<hr>
 
 		
-		<div class="col-md-4" >
-		<input class= "form-control" type="text" 
-		ng-model="searchRunning" placeholder="Sort by Name"/>
-		</div>
+
 		<a href="#" class="btn btn-default"
 				ng-click="toggleRunningTable()">Show</a>
-		<a href="#" class="btn btn-default" ng-click="toggleRunningCreate()">New Run</a>
+		<a href="#" class="btn btn-default" 
+				ng-click="toggleRunningCreate()">New Run</a>
 
 			<div ng-show="runningCreateForm">
 				<br>
@@ -188,12 +154,14 @@
 
 
 		<table class="table table-striped" ng-show="runningTable">
+			<th>Date</th>
 			<th>Distance</th>
 			<th>Time</th>
 			<th>Edit</th>
 			<th>Delete</th>
 
 			<tr ng-repeat = "workout in workouts | filter:searchRunning | orderBy:'-'" ng-if="workout.workoutName=='Run'">
+				<td class="col-md-1">{{workout.date| date:'MM/dd/yyyy @ h:mma'}}</td>
 				<td class="col-md-1">{{workout.distance}} miles</td>
 				<td class="col-md-1">{{workout.time}} </td>
 				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
