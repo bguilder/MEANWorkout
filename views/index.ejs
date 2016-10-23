@@ -18,31 +18,52 @@
 				font-size:3.1em;
 			}
 			footer{
+				padding-top:4em;
+				padding-bottom:1em;
 				text-align:center;
+				text-decoration:none;
 			}
 			.title{
 				background-color:862633;
 				color:EED484;
-				font-size: 2.0em;
+				font-size: 2.2em;
 				text-align:center;
 
 			}
 			.run{
 				background-color:862633;
 				color:EED484;
-				font-size: 2.0em;
+				font-size: 2.2em;
 				text-align:center;
 			}
 			.intro{
 				padding: 1.3em;
 				background-color:EED484;
 			}
-			.workoutButtons{
-				padding-left: 1em;
-			}
 			.runButtons{
-				padding-left: 3em;
+				padding-left: 27.8em;
 			}
+			.runForm{
+				padding-left:20em;
+			}
+
+			.liftingMain{
+				padding-left:14em;
+			}
+			.liftingForm{
+				padding-left:13em;
+			}
+			.footerLink{
+				text-decoration:none;
+			}
+
+			a{
+				text-decoration:none;
+				color:black;
+			    font-size:1.2em;
+			}
+
+
 
 
 		
@@ -68,22 +89,22 @@
                 <h2 class="title">Exercise Tracker</h2>
 				<hr>
 
-		<div class="runningMain">
+		<div class="liftingMain">
 
 		<a href="#" class="btn btn-default"
 				ng-click="toggleWorkoutSort()">Show</a>
 
 		<a href="#" class="btn btn-default"
 				ng-click="toggleNewLift()">Add Workout</a>
-
-				<div class="col-md-5" >
+		
+				<div class="col-md-6" >
 				<input class= "form-control" type="text" 
 				ng-model="searchWorkouts" placeholder="Sort by Name"/>
-				</div>
+			</div>
          </div>
-		<div ng-show="newLiftingForm">
+		<div class="liftingForm" ng-show="newLiftingForm">
 			<br>
-				<div class="col-md-4" ng-model="workoutName">
+				<div class="col-md-3" ng-model="workoutName">
 				<input class="form-control" type="text"
 				ng-model="workoutName" placeholder="Enter Workout Name"/>
 				</div>
@@ -140,14 +161,14 @@
 				ng-click="toggleRunningCreate()">New Run</a>
 	
 		</div>
-			<div ng-show="runningCreateForm">
+			<div class="runForm" ng-show="runningCreateForm">
 				<br>
-				<div class="col-md-2" >
+				<div class="col-md-3" >
 				<input class= "form-control" type="number" 
 				ng-model="distance" placeholder="Distance Ran"/>
 				</div>
 
-				<div class="col-md-2" >
+				<div class="col-md-3" >
 				<input class= "form-control" type="string" 
 				ng-model="time" placeholder="hh:mm:ss"/>
 				</div>
@@ -192,7 +213,6 @@
 
 	<footer>
 		<hr>
-		<h3>github.com/bguilder</h3>
-		<hr>
+		<a class= "footerLink" href="http://www.github.com/bguilder">github.com/bguilder</a>
 	</footer>
 </html>
