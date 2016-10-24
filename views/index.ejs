@@ -2,89 +2,13 @@
 	<head>
 		<title>Exercise Tracker</title>
     	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-		<script src="assets/js/app.js"></script>
+		<script src="../public/js/app.js"></script>
 
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta charset="UTF-8">
 
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-        <style>
-            html, body, input
-            {
-                font-size: 1.05em;
-            }
-			
-			#title{
-				margin-top: 1em;
-				margin-bottom:1em;
-				padding-bottom:1em;
-				width:90%;
-				background-color:EED484;
-			}
-			#hello{
-				font-size:4em;
-			}
-			
-			#exerciseTitle{
-				margin:0px auto;
-				text-align: center;
-				width:90%;
-				font-size:2.3em;
-				background-color:862633;
-				color:EED484;
-			}
-			#exerciseButtonSearch{
-				margin:0px auto;
-				padding-left:2em;
-				text-align: center;
-				width:85%;
-			}
-			#liftingForm{
-				font-size:.7em;
-				padding-left:2.5em;
-				width:85%;
-			}
-			.table{
-				border-radius:5px;
-				width:90%;
-				margin: 0px auto;
-				float: none;
-				text-align: left;
-			}
-			#cardioButtonSearch{
-				margin:0px auto;
-				padding-left:2em;
-				width:85%;
-				text-align:center;
-			}
-			#cardioTitle{
-				width:90%;
-				margin:0px auto;
-				text-align: center;
-				font-size:2.3em;
-				background-color:862633;
-				color:EED484;
-			}
-			#cardioForm{
-				font-size:.7em;
-				padding-left:2.5em;
-				width:85%
-			}
-			#footerLink{
-				text-align:center;
-				color:red;
-			}
-			a{
-				color:862633;
-			}
-			a:hover{
-				color:black;
-			}	
-			hr{
-				width:90%;
-				color:EED484;
-			}
-        </style>
+		<link rel='stylesheet' href="../public/css/styles.css" type="text/css"/>
 
 	</head>
 	<body>
@@ -106,7 +30,7 @@
 				<hr>	
 			<div id="exerciseButtonSearch"class="container-fluid">	
 				<a href="#" class="btn btn-default"
-				ng-click="toggleWorkoutSort()">Show</a>
+				ng-click="toggleWorkoutTable()">Show</a>
 				<a href="#" class="btn btn-default"
 				ng-click="toggleNewLift()">Add Workout</a>
 				<div class="col-md-6 col-xs-5" >
@@ -139,7 +63,7 @@
 
 
 		<div class="container-fluid">
-			<table id="lifting" class="table table-striped text-centered" ng-show="workoutSortTable">
+			<table id="lifting" class="table table-striped text-centered" ng-show="workoutTable">
 				<thead>
 					<th>Date</th>
 					<th>Workout</th>
@@ -171,9 +95,9 @@
 
 		<div id="cardioButtonSearch" class="container-fluid">
 			<a href="#" class="btn btn-default"
-			ng-click="toggleRunningTable()">Show</a>		
+			ng-click="toggleCardioTable()">Show</a>		
 			<a href="#" class="btn btn-default" 
-			ng-click="toggleRunningCreate()">New Cardio</a>	
+			ng-click="toggleNewCardio()">New Cardio</a>	
 			<div class="col-md-6 col-xs-5" >
 				<input class= "form-control" type="text" 
 				ng-model="searchCardio" placeholder="Sort by Name"/>
@@ -182,55 +106,56 @@
 
 
 
-		<div id="cardioForm" class="container"ng-show="runningCreateForm">
+		<div id="cardioForm" class="container"ng-show="newCardioForm">
 			<br>
+			<div class="col-md-3 col-xs-4" ng-model="workoutName">
+				Workout Name
+			<input class="form-control" type="text"
+			ng-model="workoutName" placeholder="Enter Workout Name"/>
+			</div> 
 			<div class="col-md-3 col-xs-2" >
 				Distance
 			<input class= "form-control" type="number" 
 			ng-model="distance" placeholder="Distance Ran"/>
 			</div>
-
 			<div class="col-md-3 col-xs-2" >
 				Time
 			<input class= "form-control" type="string" 
 			ng-model="time" placeholder="hh:mm:ss"/>
 			</div>
+			<div class="col-md-2 col-xs-2" >
+				Reps
+			<input class= "form-control" type="number" 
+			ng-model="reps" placeholder="Reps"/>
+			</div>
 			<br>
 			<a href="#" class="btn btn-default"
-			ng-click="validateTime(time); createRunningWorkout()">Add</a>
+			ng-click="validateTime(time); createCardioWorkout()">Add</a>
 		</div>
 
 
-		<table class="table table-striped" ng-show="runningTable">
+		<table class="table table-striped" ng-show="cardioTable">
 			<th>Date</th>
+			<th>Workout</th>
 			<th>Distance</th>
 			<th>Time</th>
+			<th>Reps</th>
 			<th>Edit</th>
 			<th>Delete</th>
 
 			<tr ng-repeat = "workout in workouts | filter:searchCardio | orderBy:'-'" ng-if="!workout.weight">
 				<td class="col-md-1">{{workout.date| date:'MM/dd/yyyy @ h:mma'}}</td>
-				<td class="col-md-1">{{workout.distance}} miles</td>
+				<td class="col-md-1">{{workout.workoutName}}</td>
+				<td class="col-md-1">{{workout.distance}} </td>
 				<td class="col-md-1">{{workout.time}} </td>
+				<td class="col-md-1">{{workout.reps}}</td>
 				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="toggleRunningEdit(workout._id)">Edit</a></td>
+				ng-click="toggleCardioEdit(workout._id, workout.workoutName, workout.distance, workout.time, workout.reps)">Edit</a></td>
 				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
 				ng-click="deleteClick(workout._id)">Delete</a></td>
 			</tr>
 		</table>
 
-			<div ng-show="runningEditForm">
-				<div class="col-md-2" >
-				<input class= "form-control" type="number" 
-				ng-model="distance" placeholder="Edit Distance Ran"/>
-				</div>
-				<div class="col-md-2" >
-				<input class= "form-control" type="string" 
-				ng-model="time" placeholder="hh:mm:ss"/>
-				</div>
-					<a href="#" class="btn btn-default"
-				ng-click="validateTime(time); editRunningWorkout()">Edit</a>	
-			</div>	
          </div>
 	</body>
 

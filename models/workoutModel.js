@@ -10,10 +10,6 @@ var workoutSchema = new Schema({
     weight: Number,
     distance: Number,
     time: String,
-    runningTime: String,
-    liftingTime: String,
-    coreTime: String,
-    stretchTime: String
 });
 
 var Workout = mongoose.model('Workout', workoutSchema);

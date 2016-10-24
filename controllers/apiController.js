@@ -53,32 +53,35 @@ module.exports = function(app){
         };
     });
 
-    app.post('/api/workout/createRunning',function(req,res){
-            var newRunning = Workout({
+    app.post('/api/workout/createCardio',function(req,res){
+            var newCardio = Workout({
                 username:"test",
-                workoutName: "Run",
+                workoutName: req.body.workoutName,
                 distance: req.body.distance,
-                time: req.body.time
+                time: req.body.time,
+                reps: req.body.reps
             });
-            newRunning.save(function(err){
+            newCardio.save(function(err){
                 if(err)throw err;
-                res.send('New Running Workout Created');
+                res.send('New Cardio Workout Created');
             });
         });
 
-    app.post('/api/workout/editRunning',function(req,res){
+    app.post('/api/workout/editCardio',function(req,res){
         if (req.body.id){
             Workout.findByIdAndUpdate(req.body.id, {
+              workoutName: req.body.workoutName,
               distance: req.body.distance,
-              time: req.body.time},
+              time: req.body.time,
+              reps: req.body.reps},
                 function(err,workout){
                 if (err) throw err;
-                res.send('Running Workout Updated');
+                res.send('Cardio Workout Updated');
             })
         };
     });
 
-    app.post('/api/workout/createTimes',function(req,res){
+   /* app.post('/api/workout/createTimes',function(req,res){
         var newTimes = Workout({
                 username: "test",
                 runningTime: req.body.runningTime,
@@ -104,7 +107,7 @@ module.exports = function(app){
                 res.send('Running Workout Updated');
             })
         };
-    })
+    })*/
 
     //deletes a workout
     app.delete('/api/workout/remove/:id', function(req, res) {

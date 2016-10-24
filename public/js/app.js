@@ -13,43 +13,41 @@ function($scope, $http, $location, $window){
 		$scope.id = '';
 		$scope.validTime = '';
 
-		$scope.liftingCreateForm = false;
-		$scope.liftingEditForm = false;
-		$scope.runningCreateForm = false;
-		$scope.runningEditForm = false;	
-		$scope.workoutSortTable = false;
-		$scope.runningTable = false;
+		$scope.newCardioForm = false;
 		$scope.newLiftingForm = false;
-		$scope.runningTable = false;
+		$scope.workoutTable = false;
+		$scope.cardioTable = false;
 
 		//simple toggle methods
-
-		$scope.toggleLiftingEdit = function(workoutID, workoutName,workoutReps, workoutWeight){
-				$scope.id = workoutID;
-				$scope.workoutName = prompt("Enter Workout Name",workoutName);
-				$scope.reps = prompt("Enter Reps",workoutReps);
-				$scope.weight = prompt("Enter Weight",workoutWeight);
-				$scope.editLiftingWorkout();
-		}
-		$scope.toggleRunningCreate = function(){
-				$scope.runningCreateForm = ! $scope.runningCreateForm;
-		}
-		$scope.toggleRunningEdit = function(workoutID){
-			$scope.id = workoutID;
-				$scope.runningEditForm = ! $scope.runningEditForm;
-		}
-		$scope.toggleWorkoutSort = function(){
-			$scope.workoutSortTable = ! $scope.workoutSortTable;
-		}
-		$scope.toggleRunningTable = function(){
-			$scope.runningTable = ! $scope.toggleRunningTable;
-		}
 		$scope.toggleNewLift = function(){
 			$scope.newLiftingForm = ! $scope.newLiftingForm;
 		}
-		$scope.toggleRunningTable = function(){
-			$scope.runningTable = ! $scope.runningTable;
+		$scope.toggleLiftingEdit = function(workoutID, workoutName,workoutReps, workoutWeight){
+			$scope.id = workoutID;
+			$scope.workoutName = prompt("Enter Workout Name",workoutName);
+			$scope.reps = prompt("Enter Reps",workoutReps);
+			$scope.weight = prompt("Enter Weight",workoutWeight);
+			$scope.editLiftingWorkout();
 		}
+		$scope.toggleNewCardio= function(){
+			$scope.newCardioForm = ! $scope.newCardioForm;
+		}
+		$scope.toggleCardioEdit = function(workoutID, workoutName, distance, time, reps){
+			$scope.id = workoutID;
+			$scope.workoutName = prompt("Enter Workout Name",workoutName);
+			$scope.distance = prompt("Enter Distance",distance);
+			$scope.time = prompt("Enter Time", time);
+			$scope.validateTime($scope.time);
+			$scope.reps = prompt("Enter Reps",reps);
+			$scope.editCardioWorkout();
+		}
+		$scope.toggleWorkoutTable = function(){
+			$scope.workoutTable = ! $scope.workoutTable;
+		}
+		$scope.toggleCardioTable = function(){
+			$scope.cardioTable = ! $scope.cardioTable;
+		}
+
 	
 		$http.get('/api/workouts/test')
 			.success(function(result){
@@ -91,13 +89,13 @@ function($scope, $http, $location, $window){
 
 		}
 
-		$scope.createRunningWorkout = function(){
+		$scope.createCardioWorkout = function(){
 
 			if($scope.validTime === "valid"){
-			$scope.workoutName = "Run";
-			$http.post('/api/workout/createRunning', { workoutName: $scope.workoutName, 
+			$http.post('/api/workout/createCardio', { workoutName: $scope.workoutName, 
 											distance: $scope.distance,
-											time: $scope.time
+											time: $scope.time,
+											reps: $scope.reps
 									})
             .success(function (result) {
                 $scope.msg="Success";
@@ -112,11 +110,12 @@ function($scope, $http, $location, $window){
 			}
 		}
 
-		$scope.editRunningWorkout = function(){
+		$scope.editCardioWorkout = function(){
 			if($scope.validTime === "valid"){
-			$http.post('/api/workout/editRunning', {workoutName: $scope.workoutName, 
+			$http.post('/api/workout/editCardio', {workoutName: $scope.workoutName, 
 									distance: $scope.distance, 
 									time: $scope.time,
+									reps: $scope.reps,
 									id: $scope.id
 									})
            .success(function (result) {
