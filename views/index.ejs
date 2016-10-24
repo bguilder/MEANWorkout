@@ -14,22 +14,14 @@
             {
                 font-size: 1.05em;
             }
-			.hello{
-				font-size:3.1em;
-			}
+			
 			footer{
 				padding-top:4em;
 				padding-bottom:1em;
 				text-align:center;
 				text-decoration:none;
 			}
-			.title{
-				background-color:862633;
-				color:EED484;
-				font-size: 2.2em;
-				text-align:center;
-
-			}
+			
 			.run{
 				background-color:862633;
 				color:EED484;
@@ -62,7 +54,37 @@
 				color:black;
 			    font-size:1.2em;
 			}
-
+			.table{
+				border-radius:5px;
+				width:70%;
+				margin: 0px auto;
+				float: none;
+				text-align: left;
+			}
+			#title{
+				margin-top: 1em;
+				margin-bottom:1em;
+				padding-bottom:1em;
+				width:90%;
+				background-color:EED484;
+			}
+			#hello{
+				font-size:4em;
+			}
+			#exerciseButtonSearch{
+				margin:0px auto;
+				width:92%;
+				margin:0px auto;
+			}
+			#exerciseTitle{
+				text-align: center;
+				font-size:2em;
+				background-color:862633;
+				color:EED484;
+			}
+			#liftingForm{
+				font-size:.7em;
+			}
 
 
 
@@ -71,77 +93,80 @@
 
 	</head>
 	<body>
+		<div ng-controller="mainController">
 		
-
- <div class="container">
-
-         <div ng-controller="mainController">
-
-			 <div class="intro">
-				<h1 class="hello">Hello World!</h1>
+			 <div id="title" class="container-fluid">
+				<h1 id="hello">Hello World!</h1>
 				<p1>This is my first website. It is a workout tracking application that I designed and developed from scratch
 					with help from two courses on Udemy.com: Learn and Understand Node.js, Learn and Understand AngularJS.
 					All of the source code is on my github account.	Any questions
-					feel free to contact me at bguilder@gmail.com</p1><br><br>
-					<p2>Thank you for checking out my application!</p2><br><br>
+					feel free to contact me at bguilder@gmail.com</p1>
+					<p2>Thank you for checking out my application!</p2>
 					<p3>Brian Guilder</p3>
 			 </div>
-                <h2 class="title">Exercise Tracker</h2>
+
+
+			 <div id="exerciseButtonSearch"class="container-fluid">
+                <h2 id="exerciseTitle">Exercise Tracker</h2>			
 				<hr>
-
-		<div class="liftingMain">
-
-		<a href="#" class="btn btn-default"
+				<a href="#" class="btn btn-default"
 				ng-click="toggleWorkoutSort()">Show</a>
-
-		<a href="#" class="btn btn-default"
+				<a href="#" class="btn btn-default"
 				ng-click="toggleNewLift()">Add Workout</a>
-		
-				<div class="col-md-6" >
-				<input class= "form-control" type="text" 
-				ng-model="searchWorkouts" placeholder="Sort by Name"/>
-			</div>
-         </div>
-		<div class="liftingForm" ng-show="newLiftingForm">
+				<div class="col-md-6 col-xs-3" >
+					<input class= "form-control" type="text" 
+					ng-model="searchWorkouts" placeholder="Sort by Name"/>
+				</div>
+         	</div>
+
+		<div id="liftingForm"class="container" ng-show="newLiftingForm">
 			<br>
-				<div class="col-md-3" ng-model="workoutName">
+				<div class="col-md-3 col-xs-4" ng-model="workoutName">
+					Workout Name
 				<input class="form-control" type="text"
 				ng-model="workoutName" placeholder="Enter Workout Name"/>
-				</div>
-
-				<div class="col-md-2" >
+				</div>				
+				<div class="col-md-2 col-xs-2" >
+					Reps
 				<input class= "form-control" type="number" 
 				ng-model="reps" placeholder="Reps"/>
-				</div>
-
-				<div class="col-md-2" >
+				</div>					
+				<div class="col-md-2 col-xs-2" >
+					Weight
 				<input class= "form-control" type="number" 
 				ng-model="weight" placeholder="Weight"/>
 				</div>
-
+				<br>
 				<a href="#" class="btn btn-default"
 				ng-click="createLiftingWorkout()">Add</a>	
 		</div>
 
 
-		<table class="table table-striped" ng-show="workoutSortTable">
-			<th>Date</th>
-			<th>Workout</th>
-			<th>Reps</th>
-			<th>Weight</th>
-			<th>Edit</html>
-			<th>Delete</th>
-			<tr ng-repeat = "workout in workouts | filter:searchWorkouts | orderBy:'-'" ng-if="workout.workoutName!='Run'" >
-				<td class="col-md-2">{{workout.date| date:'MM/dd/yyyy @ h:mma'}}</td>
-				<td>{{workout.workoutName}}</td>
-				<td>{{workout.reps}} </td>
-				<td>{{workout.weight}} </td>
-				<td><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="toggleLiftingEdit(workout._id, workout.workoutName, workout.reps, workout.weight)">Edit</a></td>
-				<td><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="deleteClick(workout._id)">Delete</a></td>
-			</tr>
+	<div class="container-fluid">
+		<table id="lifting" class="table table-striped text-centered" ng-show="workoutSortTable">
+			<thead>
+				<th>Date</th>
+				<th>Workout</th>
+				<th>Reps</th>
+				<th>Weight</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat = "workout in workouts | filter:searchWorkouts | orderBy:'-'" ng-if="workout.workoutName!='Run'" >
+					<td class="col-md-3">{{workout.date| date:'MM/dd/yyyy @ h:mma'}}</td>
+					<td>{{workout.workoutName}}</td>
+					<td>{{workout.reps}} </td>
+					<td>{{workout.weight}} </td>
+					<td><a href="#" class="btn btn-default"	ng-model="id"
+					ng-click="toggleLiftingEdit(workout._id, workout.workoutName, workout.reps, workout.weight)">Edit</a></td>
+					<td><a href="#" class="btn btn-default"	ng-model="id"
+					ng-click="deleteClick(workout._id)">Delete</a></td>
+				</tr>
+			</tbody>
 		</table>
+	</div>
+
 
 
 
@@ -208,6 +233,7 @@
 					<a href="#" class="btn btn-default"
 				ng-click="validateTime(time); editRunningWorkout()">Edit</a>	
 			</div>	
+         </div>
 	</body>
 
 
