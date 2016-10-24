@@ -25,9 +25,11 @@
 			 </div>
 
 
-			 
+	 <div class="modal-body row">
+ 		 <div class="col-md-6">
+
                 <h2 id="exerciseTitle">Track Lifting</h2>	
-				<hr>	
+				<br>
 			<div id="exerciseButtonSearch"class="container-fluid">	
 				<a href="#" class="btn btn-default"
 				ng-click="toggleWorkoutTable()">Show</a>
@@ -41,20 +43,20 @@
 
 		<div id="liftingForm"class="container" ng-show="newLiftingForm">
 			<br>
-			<div class="col-md-3 col-xs-4" ng-model="workoutName">
-				Workout Name
+			<div class="col-md-4 col-xs-4" ng-model="workoutName">
+				Workout
 			<input class="form-control" type="text"
-			ng-model="workoutName" placeholder="Enter Workout Name"/>
+			ng-model="workoutName"/>
 			</div>				
 			<div class="col-md-2 col-xs-2" >
 				Reps
 			<input class= "form-control" type="number" 
-			ng-model="reps" placeholder="Reps"/>
+			ng-model="reps"/>
 			</div>					
 			<div class="col-md-2 col-xs-2" >
 				Weight
 			<input class= "form-control" type="number" 
-			ng-model="weight" placeholder="Weight"/>
+			ng-model="weight"/>
 			</div>
 			<br>
 			<a href="#" class="btn btn-default"
@@ -86,13 +88,11 @@
 				</tbody>
 			</table>
 		</div>
-
-		<hr>
+	 </div>
 		
-		
+	<div class="col-md-6">
 		<h2 id="cardioTitle">Track Cardio</h2>
-		<hr>
-
+		<br>
 		<div id="cardioButtonSearch" class="container-fluid">
 			<a href="#" class="btn btn-default"
 			ng-click="toggleCardioTable()">Show</a>		
@@ -108,25 +108,25 @@
 
 		<div id="cardioForm" class="container"ng-show="newCardioForm">
 			<br>
-			<div class="col-md-3 col-xs-4" ng-model="workoutName">
-				Workout Name
+			<div class="col-md-4 col-xs-4" ng-model="workoutName">
+				Workout
 			<input class="form-control" type="text"
-			ng-model="workoutName" placeholder="Enter Workout Name"/>
+			ng-model="workoutName" />
 			</div> 
-			<div class="col-md-3 col-xs-2" >
+			<div class="col-md-2 col-xs-2" >
 				Distance
 			<input class= "form-control" type="number" 
-			ng-model="distance" placeholder="Distance Ran"/>
+			ng-model="distance" />
 			</div>
-			<div class="col-md-3 col-xs-2" >
+			<div class="col-md-2 col-xs-2" >
 				Time
 			<input class= "form-control" type="string" 
-			ng-model="time" placeholder="hh:mm:ss"/>
+			ng-model="time" />
 			</div>
 			<div class="col-md-2 col-xs-2" >
 				Reps
 			<input class= "form-control" type="number" 
-			ng-model="reps" placeholder="Reps"/>
+			ng-model="reps" />
 			</div>
 			<br>
 			<a href="#" class="btn btn-default"
@@ -156,10 +156,11 @@
 			</tr>
 		</table>
 
-         </div>
+   	 </div>
+	</div>
+
 	</body>
 
-	<hr>
 	
 	<footer>
 		<div class="container"id="footerLink">

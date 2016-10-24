@@ -25,12 +25,12 @@ html, body, input{
   margin:0px auto;
   padding-left:2em;
   text-align: center;
-  width:85%;
+  width:90%;
 }
 #liftingForm{
   font-size:.7em;
   padding-left:2.5em;
-  width:85%;
+  width:100%;
 }
 .table{
   border-radius:5px;
@@ -42,7 +42,7 @@ html, body, input{
 #cardioButtonSearch{
   margin:0px auto;
   padding-left:2em;
-  width:85%;
+  width:90%;
   text-align:center;
 }
 #cardioTitle{
@@ -56,9 +56,10 @@ html, body, input{
 #cardioForm{
   font-size:.7em;
   padding-left:2.5em;
-  width:85%
+  width:100%;
 }
 #footerLink{
+  padding:2em;
   text-align:center;
   color:red;
 }
@@ -71,4 +72,11 @@ a:hover{
 hr{
   width:90%;
   color:EED484;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
