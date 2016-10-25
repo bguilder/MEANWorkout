@@ -12,7 +12,6 @@ function($scope, $http, $location, $window){
 		$scope.time = '';
 		$scope.id = '';
 		$scope.validTime = '';
-
 		$scope.newCardioForm = false;
 		$scope.newLiftingForm = false;
 		$scope.workoutTable = false;
@@ -25,8 +24,8 @@ function($scope, $http, $location, $window){
 		$scope.toggleLiftingEdit = function(workoutID, workoutName,workoutReps, workoutWeight){
 			$scope.id = workoutID;
 			$scope.workoutName = prompt("Enter Workout Name",workoutName);
-			$scope.reps = prompt("Enter Reps",workoutReps);
-			$scope.weight = prompt("Enter Weight",workoutWeight);
+			$scope.reps = prompt("Enter Reps");
+			$scope.weight = prompt("Enter Weight");
 			$scope.editLiftingWorkout();
 		}
 		$scope.toggleNewCardio= function(){
@@ -35,10 +34,10 @@ function($scope, $http, $location, $window){
 		$scope.toggleCardioEdit = function(workoutID, workoutName, distance, time, reps){
 			$scope.id = workoutID;
 			$scope.workoutName = prompt("Enter Workout Name",workoutName);
-			$scope.distance = prompt("Enter Distance",distance);
-			$scope.time = prompt("Enter Time", time);
+			$scope.distance = prompt("Enter Distance");
+			$scope.time = prompt("Enter Time");
 			$scope.validateTime($scope.time);
-			$scope.reps = prompt("Enter Reps",reps);
+			$scope.reps = prompt("Enter Reps");
 			$scope.editCardioWorkout();
 		}
 		$scope.toggleWorkoutTable = function(){
@@ -105,7 +104,7 @@ function($scope, $http, $location, $window){
                 console.log(data);
             });
 		}
-			else{
+			else if ($scope.validTime === "invalid") {
 				window.alert("Enter(hh:mm:ss)");
 			}
 		}
@@ -126,7 +125,7 @@ function($scope, $http, $location, $window){
                 console.log(data);
             });
 			}
-			else{
+			else if($scope.validTime === "invalid"){
 				window.alert("Enter(hh:mm:ss)");
 			}
 		}
