@@ -1,4 +1,4 @@
-var app = angular.module('TestApp', []);
+var app = angular.module('ExerciseApp', []);
 
 
 app.controller('mainController',['$scope', '$http', '$location', '$window',
@@ -147,8 +147,12 @@ function($scope, $http, $location, $window){
 	$scope.validateTime = function(x){
 		console.log("here");
 
-		var regex = /^([0-9]:)?[0-5]?[0-9]:[0-5][0-9]$/;
-		if(x.match(regex)){
+		var regex = /^([0-9]:)?([0-5]?[0-9]:)?[0-5]?[0-9]$/;
+		if(x == null){
+			console.log("null");
+		}
+
+		else if(x.match(regex)){
 			console.log("valid");
 			$scope.validTime = "valid";
 		}
@@ -156,11 +160,6 @@ function($scope, $http, $location, $window){
 			console.log("invalid");
 			$scope.validTime = "invalid";
 		}
-	}
-
-	$scope.formatDate = function(x){
-		var date = x;
-		console.log(date);
 	}
 
 }]);
