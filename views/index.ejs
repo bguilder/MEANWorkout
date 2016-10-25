@@ -134,37 +134,38 @@
 		</div>
 
 
-		<table class="table table-striped" ng-show="cardioTable">
-			<th>Date</th>
-			<th>Workout</th>
-			<th>Distance</th>
-			<th>Time</th>
-			<th>Reps</th>
-			<th>Edit</th>
-			<th>Delete</th>
-
-			<tr ng-repeat = "workout in workouts | filter:searchCardio | orderBy:'-'" ng-if="!workout.weight">
-				<td class="col-md-1">{{workout.date| date:'MM/dd/yyyy @ h:mma'}}</td>
-				<td class="col-md-1">{{workout.workoutName}}</td>
-				<td class="col-md-1">{{workout.distance}} </td>
-				<td class="col-md-1">{{workout.time}} </td>
-				<td class="col-md-1">{{workout.reps}}</td>
-				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="toggleCardioEdit(workout._id, workout.workoutName, workout.distance, workout.time, workout.reps)">Edit</a></td>
-				<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
-				ng-click="deleteClick(workout._id)">Delete</a></td>
-			</tr>
-		</table>
-
-   	 </div>
+		<div class="container-fluid">
+			<table id="lifting"class="table table-striped text-centered" ng-show="cardioTable">
+				<thead>
+					<th>Date</th>
+					<th>Workout</th>
+					<th>Distance</th>
+					<th>Time</th>
+					<th>Reps</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "workout in workouts | filter:searchCardio | orderBy:'-'" ng-if="!workout.weight">
+						<td class="col-md-1">{{workout.date| date:'MM/dd/yyyy @ h:mma'}}</td>
+						<td class="col-md-1">{{workout.workoutName}}</td>
+						<td class="col-md-1">{{workout.distance}} </td>
+						<td class="col-md-1">{{workout.time}} </td>
+						<td class="col-md-1">{{workout.reps}}</td>
+						<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
+						ng-click="toggleCardioEdit(workout._id, workout.workoutName, workout.distance, workout.time, workout.reps)">Edit</a></td>
+						<td class="col-md-1"><a href="#" class="btn btn-default"	ng-model="id"
+						ng-click="deleteClick(workout._id)">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-
 	</body>
 
-	
-	<footer>
-		<div class="container"id="footerLink">
+	<footer id="footerLink">
+		<hr>
 		<a href="http://www.github.com/bguilder">github.com/bguilder</a>
-		</div>
+	
 	</footer>
 </html>

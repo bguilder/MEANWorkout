@@ -16,14 +16,14 @@ html, body, input{
 #exerciseTitle{
   margin:0px auto;
   text-align: center;
-  width:90%;
-  font-size:2.3em;
+  width:84%;
+  font-size:2.5em;
   background-color:862633;
   color:EED484;
 }
 #exerciseButtonSearch{
   margin:0px auto;
-  padding-left:2em;
+  padding-left:1em;
   text-align: center;
   width:90%;
 }
@@ -41,15 +41,15 @@ html, body, input{
 }
 #cardioButtonSearch{
   margin:0px auto;
-  padding-left:2em;
+  padding-left:1em;
   width:90%;
   text-align:center;
 }
 #cardioTitle{
-  width:90%;
+  width:84%;
   margin:0px auto;
   text-align: center;
-  font-size:2.3em;
+  font-size:2.5em;
   background-color:862633;
   color:EED484;
 }
@@ -59,12 +59,12 @@ html, body, input{
   width:100%;
 }
 #footerLink{
-  padding:2em;
+  margin-top:18em;
   text-align:center;
-  color:red;
 }
 a{
   color:862633;
+
 }
 a:hover{
   color:black;
